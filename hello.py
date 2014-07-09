@@ -19,4 +19,4 @@ class Post(db.Model):
 admin = Admin(app)
 admin.add_view(ModelView(Post, db.session))
 
-app.run()
+# app.run()
