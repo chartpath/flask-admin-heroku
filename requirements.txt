@@ -18,3 +18,4 @@ blinker==1.3
 flask-heroku==0.1.9
 gunicorn==19.0.0
 itsdangerous==0.24
+psycopg2==2.5.3
