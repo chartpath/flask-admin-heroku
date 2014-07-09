@@ -3,9 +3,23 @@ from flask import Flask
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.script import Manager
+from flask.ext.migrate import Migrate, MigrateCommand
+from flask.ext.heroku import Heroku
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+admin = Admin(app)
+manager = Manager(app)
+heroku = Heroku(app)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['DEBUG'] = True
+
+manager.add_command('db', MigrateCommand)
+if __name__ == '__main__':
+    manager.run()
 
 @app.route('/')
 def hello():
@@ -16,7 +30,4 @@ class Post(db.Model):
 	title = db.Column(db.Unicode(120))
 	text = db.Column(db.UnicodeText, nullable=False)
 
-admin = Admin(app)
 admin.add_view(ModelView(Post, db.session))
-
-# app.run()
