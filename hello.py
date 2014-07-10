@@ -14,7 +14,6 @@ admin = Admin(app)
 manager = Manager(app)
 heroku = Heroku(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['DEBUG'] = True
 try: from localconfig import *
 except ImportError: pass

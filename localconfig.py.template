@@ -1,0 +1,3 @@
+from hello import app
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/helloflask'

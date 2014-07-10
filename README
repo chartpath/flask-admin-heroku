@@ -1,0 +1,11 @@
+Flask app deployable to Heroku and based on:
+- flask-admin
+- flask-migrate
+
+Use localconfig.py to specify a different local database URL for development.
+
+flask-heroku takes care of the db environment variable on the Heroku end.
+
+To run initial migration, first create the DB and then:
+local: python hello.py db upgrade
+heroku: heroku run python hello.py db upgrade
