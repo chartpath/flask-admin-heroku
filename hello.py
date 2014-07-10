@@ -16,7 +16,8 @@ heroku = Heroku(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['DEBUG'] = True
-from localconfig import *
+try: from localconfig import *
+except ImportError: pass
 
 manager.add_command('db', MigrateCommand)
 if __name__ == '__main__':
@@ -24,7 +25,7 @@ if __name__ == '__main__':
 
 @app.route('/')
 def hello():
-	return 'Hello world!'
+	return 'Hello World!'
 	
 class Post(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
