@@ -14,10 +14,9 @@ admin = Admin(app)
 manager = Manager(app)
 heroku = Heroku(app)
 
-class BaseConfig(object):
-	SQLALCHEMY_DATABASE_URI = 'postgres://localhost/helloflask'
-	DEBUG = True
-app.config.from_object(BaseConfig)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['DEBUG'] = True
+from localconfig import *
 
 manager.add_command('db', MigrateCommand)
 if __name__ == '__main__':
