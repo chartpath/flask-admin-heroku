@@ -5,15 +5,14 @@ from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
-from flask.ext.heroku import Heroku
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 admin = Admin(app)
 manager = Manager(app)
-heroku = Heroku(app)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['DEBUG'] = True
 try: from localconfig import *
 except ImportError: pass
